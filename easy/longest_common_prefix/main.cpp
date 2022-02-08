@@ -1,9 +1,10 @@
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-class Solution {
+class Solution0 {
 public:
     string longestCommonPrefix(vector<string>& strs) {
     	size_t minLength = 200;
@@ -28,5 +29,29 @@ public:
     	}
 
     	return commonPrefix;
+    }
+};
+
+class Solution1 {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+    	string answer = "";
+
+    	std::sort(strs.begin(), strs.end());
+    	const string& a = strs.front();
+    	const string& b = strs.back();
+
+    	size_t minimum_length = std::min(
+    		a.size(), b.size()
+    	);
+    	for(size_t i = 0; i != minimum_length; ++i) {
+    		if(a[i] == b[i]) {
+    			answer += a[i];
+    		} else {
+    			break;
+    		}
+    	}
+
+    	return answer;
     }
 };
