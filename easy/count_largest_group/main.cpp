@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Solution {
+class Solution0 {
     int sumOfDigits(int n) {
         int sum = 0;
         do {
@@ -37,7 +37,41 @@ public:
     }
 };
 
+class Solution1 {
+    int sumOfDigits(int n) {
+        int sum = 0;
+        do {
+            sum += n % 10;
+            n /= 10;
+        } while(n);
+        return sum;
+    }
+public:
+    int countLargestGroup(int n) {
+        int occurences[38] = {0};
+        for(int i = 1; i <= n; ++i) {
+            occurences[sumOfDigits(i)] += 1;
+        }
+
+        int max_occurences = 0;
+        for(int i = 1; i <= 37; ++i) {
+            if(occurences[i] > max_occurences) max_occurences = occurences[i];
+        }
+
+        int result = 0;
+        for(int i = 1; i <= 37; ++i) {
+            if(occurences[i] == max_occurences) result += 1;
+        }
+
+        return result;
+    }
+};
+
+
 int main() {
-    Solution solution;
-    solution.countLargestGroup(13);
+    Solution0 solution0;
+    cout << solution0.countLargestGroup(13) << endl;
+
+    Solution1 solution1;
+    cout << solution1.countLargestGroup(13) << endl;
 }
