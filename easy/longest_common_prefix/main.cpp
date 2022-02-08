@@ -55,3 +55,30 @@ public:
     	return answer;
     }
 };
+
+class Solution2 {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+    	size_t minLength = 200;
+    	for(const string& str: strs) {
+    		if(str.size() < minLength) {
+    			minLength = str.size();
+    		}
+    	}
+
+    	size_t j = 0;
+    	while(j < minLength) {
+    		for(size_t i = 0; i != strs.size() - 1; ++i) {
+    			if(strs[i][j] != strs[i + 1][j]) {
+    				if(j == 0) {
+    					return "";
+    				} else {
+    					return strs[0].substr(0, j);
+    				}
+    			}
+    		}
+    		j++;
+    	}
+    	return strs[0].substr(0, j);
+    }
+};
